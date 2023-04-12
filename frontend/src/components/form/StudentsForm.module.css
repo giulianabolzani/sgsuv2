@@ -1,0 +1,39 @@
+.form_container{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form_container input{
+    background-color: #ededed;
+}
+
+.input_one{
+    padding: 10px;
+    display: flex;
+}
+
+.input_one input{
+    width: 500px;
+    margin-right: 35px;
+}
+
+.input_two{
+    padding: 10px;
+    display: flex;
+}
+
+.input_two input{
+    width: 300px;
+    margin-right: 35px;
+}
+
+.input_three{
+    padding: 10px;
+    display: flex;
+}
+
+.input_three input{
+    width: 400px;
+    margin-right: 35px;
+}
