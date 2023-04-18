@@ -25,7 +25,7 @@ class MaterialsController {
 
         try{
             const novoMaterialCriado = await database.Materials.create(novoMaterial)
-            return res.status(200).json(novoMaterialCriado)
+            return res.status(200).json({message: `Material cadastrado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }
@@ -91,7 +91,7 @@ class MaterialsController {
                     id: Number(id)
                 }
             })
-            return res.status(200).json(materialAtualizado)
+            return res.status(200).json({message: `Material atualizado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }
@@ -107,7 +107,7 @@ class MaterialsController {
                     id: Number(id)
                 }
             })
-            return res.status(200).json({mensagem: `Material deletado com sucesso!`})
+            return res.status(200).json({message: `Material deletado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }

@@ -1,18 +1,15 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const Financeiros = sequelize.define('Financeiros', {
-    mes: DataTypes.DATE
-  }, {});
-  Financeiros.associate = function (models) {
+	const Financeiros = sequelize.define('Financeiros', {
+    mes_referencia: DataTypes.DATEONLY
+	}, {});
+	Financeiros.associate = function(models){
+		Financeiros.belongsTo(models.Mensalidades, {
+			foreignKey: 'mensalidade_id'
+		});
     Financeiros.belongsTo(models.Materials, {
-      foreignKey: 'materials_id'
-    })
-    Financeiros.belongsTo(models.Students, {
-      foreignKey: 'students_id'
-    })
-  };
-  return Financeiros;
+			foreignKey: 'materials_id'
+		});
+	};
+	return Financeiros;
 };

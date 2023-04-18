@@ -21,7 +21,7 @@ function AllMaterials(){
                 },
             })
             .then((response) => {
-                setMaterials(response.data.materials)
+                setMaterials(response.data)
                 setRemoveLoading(true)
             })
         }, 1000)
@@ -77,7 +77,7 @@ function AllMaterials(){
             </div>
             <div className={Styles.materialslist_container}>
                 {forms && <MaterialsForm active={setForms} btnText="Cadastrar" handleSubmit={createMaterials}/>}
-                {materials > 0 &&
+                {materials &&
                     materials.map((materials) => (
                         <div className={Styles.materials_card} key={materials.id}>
                             <p>
@@ -104,7 +104,7 @@ function AllMaterials(){
                     ))
                 }
                 {!removeLoading && <Loading />}
-                {removeLoading && materials === 0 &&<p>Você não possui Materiais cadastrados</p>}
+                {removeLoading && materials?.length < 1 &&<p>Você não possui Materiais cadastrados</p>}
             </div>
         </section>
     )

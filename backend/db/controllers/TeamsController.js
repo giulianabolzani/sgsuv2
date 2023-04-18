@@ -29,7 +29,7 @@ class TeamsController {
 
         try{
             const novoFuncionarioCriado = await database.Teams.create(novoFuncionario)
-            return res.status(200).json(novoFuncionarioCriado)
+            return res.status(200).json({message: `Funcionário cadastrado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }
@@ -98,7 +98,7 @@ class TeamsController {
                     id: Number(id)
                 }
             })
-            return res.status(200).json(funcionarioAtualizado)
+            return res.status(200).json({message: `Funcionário atualizado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }
@@ -114,7 +114,7 @@ class TeamsController {
                     id: Number(id)
                 }
             })
-            return res.status(200).json({mensagem: `Funcionário deletado com sucesso!`})
+            return res.status(200).json({message: `Funcionário deletado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }

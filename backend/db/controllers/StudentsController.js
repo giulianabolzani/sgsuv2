@@ -7,13 +7,16 @@ class StudentsController{
         const novoStudents = {
             nome: req.body.nome,
             telefone: req.body.telefone,
-            data_nascimento: req.body.nascimento,
+            data_nascimento: req.body.data_nascimento,
             email: req.body.email,
             endereco: req.body.endereco,
             nome_responsavel: req.body.nome_responsavel,
             telefone_responsavel: req.body.telefone_responsavel,
-            materials_id: req.body.materials_id
+            materials_id: req.body.materials_id,
+            mensalidade_id: req.body.mensalidade_id
         }
+
+        console.log(novoStudents)
 
         if(!novoStudents.nome){
             res.status(422).json({ message: 'O nome é obrigatório!'})
@@ -26,7 +29,7 @@ class StudentsController{
 
         try{
             const novoStudentsCriado = await database.Students.create(novoStudents)
-            return res.status(200).json(novoStudentsCriado)
+            return res.status(200).json({message: `Aluno cadastrado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }
@@ -70,14 +73,15 @@ class StudentsController{
             endereco: req.body.endereco,
             nome_responsavel: req.body.nome_responsavel,
             telefone_responsavel: req.body.telefone_responsavel,
-            materials_id: req.body.materials_id
+            materials_id: req.body.materials_id,
+            mensalidade_id: req.body.mensalidade_id
         }
 
-        if(!novoStudents.nome){
+        if(!novasInfos.nome){
             res.status(422).json({ message: 'O nome é obrigatório!'})
             return
         }
-        if(!novoStudents.telefone){
+        if(!novasInfos.telefone){
             res.status(422).json({ message: 'O telefone é obrigatório!'})
             return
         }
@@ -93,7 +97,7 @@ class StudentsController{
                     id: Number(id)
                 }
             })
-            return res.status(200).json(studentsAtualizado)
+            return res.status(200).json({message: `Aluno atualizado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }
@@ -109,7 +113,7 @@ class StudentsController{
                     id: Number(id)
                 }
             })
-            return res.status(200).json({mensagem: `Aluno deletado com sucesso!`})
+            return res.status(200).json({message: `Aluno deletado com sucesso!`})
         } catch(error){
             return res.status(500).json(error.message)
         }

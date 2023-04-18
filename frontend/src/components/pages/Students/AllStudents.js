@@ -4,23 +4,22 @@ import useFlashMessage from '../../../hooks/useFlashMessage';
 import api from '../../../utils/api';
 import Styles from './Dashboard.module.css';
 import Table from 'react-bootstrap/Table';
-import {AiOutlineEdit, AiOutlineInfoCircle, AiFillDelete} from 'react-icons/ai';
+import { AiOutlineEdit, AiOutlineInfoCircle, AiFillDelete } from 'react-icons/ai';
 
 function AllStudents() {
     const [students, setStudents] = useState([])
     const { setFlashMessage } = useFlashMessage()
-    const [token] = useState(localStorage.getItem('token') || '')
 
     useEffect(() => {
-        api.get('/students/all', {
+        api.get('http://localhost:5000/students/all', {
             headers: {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                setStudents(response.data.students)
-            })
-    })
+        .then((response) => {
+            setStudents(response.data)
+        })
+    }, [])
 
     async function removeStudent(id) {
         let msgType = 'sucess'
@@ -49,34 +48,37 @@ function AllStudents() {
                 <h1>Alunos</h1>
                 <Link to="/students/create">Cadastrar Aluno</Link>
             </div>
-                <Table className={Styles.studentlist_container}>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Data de Nascimento</th>
-                            <th>Classe</th>
-                            <th>Endereço</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {students.length > 0 &&
-                            students.map((students) =>
-                                <tr key={students.id}>
-                                    <td>{students.nome}</td>
-                                    <td>{students.telefone}</td>
-                                    <td>{students.email}</td>
-                                    <td>
-                                        <Link to={`/students/edit/${students.id}`}><AiOutlineInfoCircle/></Link>
-                                        <Link to={`/students/edit/${students.id}`}><AiOutlineEdit/></Link>
-                                        <AiFillDelete onClick={() => {removeStudent(students.id)}}/>
-                                    </td>
-                                </tr>
-                            )
-                        }
-                        {students.length === 0 && <p>Você não possui Alunos cadastrados</p>}
-                    </tbody>
-                </Table>
+            <Table className={Styles.studentlist_container}>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data de Nascimento</th>
+                        <th>Classe</th>
+                        <th>Endereço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {students &&
+                        students.map((students) =>
+                            <tr key={students.id}>
+                                <td>{students.nome}</td>
+                                <td>{students.telefone}</td>
+                                <td>{students.email}</td>
+                                <td>{students.endereco}</td>
+                                <td>
+                                    <Link to={`/students/${students.id}`}><AiOutlineInfoCircle /></Link>
+                                    <Link to={`/students/edit/${students.id}`}><AiOutlineEdit /></Link>
+                                    <AiFillDelete onClick={() => { removeStudent(students.id) }} />
+                                </td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </Table>
+            <>
+                {students.length === 0 && <p>Você não possui alunos cadastrados</p>}
+            </>
         </section>
     )
 }

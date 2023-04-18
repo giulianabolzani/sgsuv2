@@ -21,7 +21,7 @@ function MaterialsForm({handleSubmit, materialsData, btnText, active}){
   }
 
   return(
-    <form onSubmit={submit} className={Styles.materials_card} form={active}>
+    <form className={Styles.materials_card} form={active}>
       <Input
         text="Nome"
         type="text"
@@ -45,7 +45,7 @@ function MaterialsForm({handleSubmit, materialsData, btnText, active}){
       />
       <div className={Styles.submit}>
         <AiFillCloseSquare onClick={closeForm}/>
-        <input type="submit" value={btnText} onClick={closeForm}/>
+        <input type="button" value={btnText} onClick={submit}/>
       </div>
     </form>
   )

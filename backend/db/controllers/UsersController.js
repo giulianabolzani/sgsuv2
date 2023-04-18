@@ -74,7 +74,7 @@ class UserController{
 
         try{
             const novoUsuarioCriado = await user.save()
-            return res.status(200).json(novoUsuarioCriado)
+            return res.status(200).json(novoUsuarioCriado, req, res)
         } catch(error){
             res.status(500).json({ message: error })
         }

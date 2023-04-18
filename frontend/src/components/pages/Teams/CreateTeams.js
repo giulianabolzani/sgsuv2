@@ -1,19 +1,18 @@
-import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import StudentsForm from '../../form/StudentsForm';
+import { useNavigate } from 'react-router-dom';
+import TeamsForm from '../../form/teamsForm/TeamsForm';
 import useFlashMessage from '../../../hooks/useFlashMessage';
 import api from '../../../utils/api';
-import Styles from './CreateStudent.module.css';
+import Styles from '../Auth/CreateStudent.module.css';
 
-function NewStudents(){
+function NewTeams(){
     const {setFlashMessage} = useFlashMessage()
     const navigate = useNavigate()
 
-    async function createStudents(students){
+    async function createTeams(teams){
         let msgType = 'sucess'
-        students.students = 0
+        teams.teams = 0
 
-        const data = await api.post('/students/create', students, {
+        const data = await api.post('/teams/create', teams, {
             'Content-type': "application/json",
         })
         .then((response) => {
@@ -26,19 +25,19 @@ function NewStudents(){
 
         setFlashMessage(data.message, msgType)
         if(msgType !== 'error'){
-            navigate('/students/all')
+            navigate('/teams/all')
         }
-        
     }
+
+
     return(
         <section className={Styles.section}>
             <div className={Styles.text}>
-                <h1>Cadastro de Alunos</h1>
-                <StudentsForm handleSubmit={createStudents} btnText="Cadastrar"/>
+                <h1>Cadastro de Funcionários</h1>
+                <TeamsForm handleSubmit={createTeams} btnText="Cadastrar"/>
             </div>
         </section>
     )
 }
 
-export default NewStudents;
-
+export default NewTeams;

@@ -7,20 +7,21 @@ import Select from './Select';
 function StudentsForm({ handleSubmit, studentData, btnText }) {
   const [materials, setMaterials] = useState([])
   const [student, setStudent] = useState(studentData || {})
+  const [selected, setSelected] = useState('')
   const [token] = useState(localStorage.getItem('token') || '')
 
   useEffect(() => {
-    api.get('/materials', {
+    api.get('/materials/all', {
       headers: {
-        Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'application/json',
       },
     })
       .then((response) => {
-        setMaterials(response.data.materials)
+        setMaterials(response.data)
       })
   }, [token])
 
+  console.log(selected)
 
   const submit = (e) => {
     e.preventDefault()
@@ -32,14 +33,6 @@ function StudentsForm({ handleSubmit, studentData, btnText }) {
     console.log(student)
   }
 
-  function handleSelect(e){
-    setStudent({...student, 
-      materials: {
-        id: e.target.value,
-        nome: e.target.options[e.target.selectedIndex].text,
-      },
-    })
-  }
 
   return (
     <form onSubmit={submit} className={Styles.form_container}>
@@ -53,65 +46,68 @@ function StudentsForm({ handleSubmit, studentData, btnText }) {
           value={student.nome}
         />
         <Input
-          text="Nome do Resposável"
+          text="Telefone"
           type="text"
-          name="responsible_name"
-          placeholder="Informe o nome do Responsável pelo Aluno"
+          name="telefone"
+          placeholder="Informe o telefone do Aluno"
           handleOnChange={handleChange}
-          value={student.responsible_name}
+          value={student.telefone}
         />
       </div>
       <div className={Styles.input_two}>
         <Input
-          text="Classe"
-          type="text"
-          name="classe"
-          placeholder="Informe a Classe do Aluno"
-          handleOnChange={handleChange}
-          value={student.classe}
-        />
-        <Input
           text="Data de nascimento"
           type="date"
-          name="age"
+          name="data_nascimento"
           placeholder="Informe a data de nascimento"
           handleOnChange={handleChange}
-          value={student.age}
+          value={student.data_nascimento}
         />
         <Input
-          text="Telefone do Resposável"
+          text="Endereço"
           type="text"
-          name="responsible_phone"
-          placeholder="Informe o Telefone do Responsável"
+          name="endereco"
+          placeholder="Informe o Endereço do Aluno"
           handleOnChange={handleChange}
-          value={student.responsible_phone}
+          value={student.endereco}
+        />
+        <Input
+          text="Email"
+          type="text"
+          name="email"
+          placeholder="Informe o email"
+          handleOnChange={handleChange}
+          value={student.email}
+        />
+        <Input
+          text="Nome do Responsável"
+          type="text"
+          name="nome_responsavel"
+          placeholder="Informe o nome do responsável do Aluno"
+          handleOnChange={handleChange}
+          value={student.nome_responsavel}
         />
       </div>
       <div className={Styles.input_three}>
         <Input
-          text="Endereço"
+          text="Telefone do Responsável"
           type="text"
-          name="address"
-          placeholder="Informe o Endereço do Aluno"
+          name="telefone_responsavel"
+          placeholder="Informe o telefone do responsável do Aluno"
           handleOnChange={handleChange}
-          value={student.address}
-        />
-        <Input
-          text="Telefone"
-          type="text"
-          name="phone"
-          placeholder="Informe o Telefone do Aluno"
-          handleOnChange={handleChange}
-          value={student.phone}
+          value={student.telefone_responsavel}
         />
       </div>
       <div>
-        <Select 
+        <Select
           name="materials"
           text="Selecione o material"
           options={materials}
-          handleOnChange={handleSelect}
-          value={student.materials ? student.materials.nome : ''}
+          handleOnChange={(e) => {
+            setStudent({ ...student, materials_id: parseInt(e.target.value) })
+            setSelected(e.target.value)
+          }}
+          value={selected}
         />
       </div>
       <div className={Styles.submit}>

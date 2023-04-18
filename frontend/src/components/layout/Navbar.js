@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IoIosLogIn, IoMdPersonAdd } from 'react-icons/io'
-import {AiOutlineHome, AiOutlineUser, AiOutlineTeam, AiOutlineHighlight, AiOutlineLineChart, AiOutlineLogout} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineUser, AiOutlineTeam, AiOutlineHighlight, AiOutlineBook, AiOutlineLineChart, AiOutlineLogout} from 'react-icons/ai'
 import Logo from '../../assets/img/logosg.png';
 import Styles from './Navbar.module.css';
 import { useContext } from 'react';
@@ -29,9 +29,15 @@ function Navbar(){
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/construction">
+                                <Link to="/teams/all">
                                     <AiOutlineTeam/>
                                     <span>Equipe</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/turmas/all">
+                                    <AiOutlineBook/>
+                                    <span>Turmas</span>
                                 </Link>
                             </li>
                             <li>

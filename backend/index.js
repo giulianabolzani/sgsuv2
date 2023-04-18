@@ -5,6 +5,7 @@ const conn = require('./db/conn')
 const UserRoutes = require('./db/routes/userRoute')
 const StudentsRoutes = require('./db/routes/studentsRoute')
 const MaterialsRoutes = require('./db/routes/materialsRoute')
+const TeamsRoutes = require('./db/routes/teamsRoute')
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.static('public'))
 app.use('/users', UserRoutes)
 app.use('/students', StudentsRoutes)
 app.use('/materials', MaterialsRoutes)
+app.use('/teams', TeamsRoutes)
 
 conn
     .sync()

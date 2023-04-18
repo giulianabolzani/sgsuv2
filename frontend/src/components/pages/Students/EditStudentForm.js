@@ -26,28 +26,52 @@ function EditStudentsForm({handleSubmit, studentData, btnText}){
         value={studentData.nome}
       />
       <Input
-        text="Data de nascimento"
-        type="date"
-        name="age"
-        placeholder="Informe a data de nascimento"
+        text="Telefone"
+        type="text"
+        name="telefone"
+        placeholder="Informe o telefone do Aluno"
         handleOnChange={handleChange}
-        value={studentData.age}
+        value={studentData.telefone}
       />
       <Input
-        text="Classe"
-        type="text"
-        name="classe"
-        placeholder="Informe a Classe do Aluno"
+        text="Data de nascimento"
+        type="date"
+        name="data_nascimento"
+        placeholder="Informe a data de nascimento"
         handleOnChange={handleChange}
-        value={studentData.classe}
+        value={studentData.data_nascimento}
       />
       <Input
         text="Endereço"
         type="text"
-        name="address"
+        name="endereco"
         placeholder="Informe o Endereço do Aluno"
         handleOnChange={handleChange}
-        value={studentData.address}
+        value={studentData.endereco}
+      />
+      <Input
+        text="E-mail"
+        type="text"
+        name="email"
+        placeholder="Informe o email do Aluno"
+        handleOnChange={handleChange}
+        value={studentData.email}
+      />
+      <Input
+        text="Nome do Responsável"
+        type="text"
+        name="nome_responsavel"
+        placeholder="Informe o nome do responsável do Aluno"
+        handleOnChange={handleChange}
+        value={studentData.nome_responsavel}
+      />
+      <Input
+        text="Telefone do Responsável"
+        type="text"
+        name="telefone_responsavel"
+        placeholder="Informe o telefone do responsável do Aluno"
+        handleOnChange={handleChange}
+        value={studentData.telefone_responsavel}
       />
       <div className={Styles.submit}>
         <input type="submit" value={btnText} />

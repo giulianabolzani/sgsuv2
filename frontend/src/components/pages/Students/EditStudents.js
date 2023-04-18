@@ -19,7 +19,7 @@ function EditStudents() {
             },
         })
         .then((response) => {
-            setStudents(response.data.student)
+            setStudents(response.data)
         })
 
         console.log(student)
@@ -51,7 +51,7 @@ function EditStudents() {
         })
 
         if(msgType !== 'error'){
-            navigate('/students')
+            navigate('/students/all')
             setFlashMessage(data.message, msgType)
         }
    }
